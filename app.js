@@ -1,11 +1,13 @@
 // app.js
 const express = require("express");
+const cors = require("cors");
 const { getConnection } = require("./db");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); // JSON 요청 본문 파싱
+app.use(cors());
 
 // 루트 경로에 대한 라우터 추가
 app.get("/", (req, res) => {
@@ -13,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 // 모든 카드 조회
-app.get("/api/cards", async (req, res) => {
+app.get("/get/cards", async (req, res) => {
   let connection;
   try {
     connection = await getConnection();
